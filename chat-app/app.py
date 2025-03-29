@@ -51,7 +51,7 @@ def healthcheck():
     return json.dumps({'status': "ok", "message": "server is running"}), 200, {'ContentType':'application/json'} 
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/auth/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         email = request.form.get('email')
@@ -76,7 +76,7 @@ def signup():
     
     return render_template('signup.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/auth/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
