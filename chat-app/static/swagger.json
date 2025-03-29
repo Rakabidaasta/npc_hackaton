@@ -7,7 +7,7 @@
     "paths": {
       "/healthcheck": {
         "get": {
-          "summary": "Приветствие",
+          "summary": "Check app's online",
           "responses": {
             "200": {
               "description": "Успешный ответ"
