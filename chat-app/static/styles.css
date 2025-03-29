@@ -13,7 +13,7 @@ body {
 .container {
     width: 80%;
     margin: auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 20px;
 }
 
@@ -103,6 +103,7 @@ button > a {
     padding: 15px 20px;
     border-radius: 5px;
     color: #fff;
+    background-color: #ffc6cc;
     font-weight: bold;
     opacity: 0;
     transform: translateY(-20px);

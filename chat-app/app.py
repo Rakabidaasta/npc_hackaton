@@ -54,19 +54,17 @@ def healthcheck():
 @app.route('/auth/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        email = request.form.get('email')
-        name = request.form.get('name')
+        username = request.form.get('username')
         password = request.form.get('password')
         
-        existing_user = db.users.find_one({'email': email})
+        existing_user = db.users.find_one({'username': username})
         if existing_user:
             flash('Пользователь с таким email уже существует.')
             return redirect(url_for('signup'))
         
         hashed_password = generate_password_hash(password)
         new_user = {
-            'email': email,
-            'name': name,
+            'username': username,
             'password': hashed_password
         }
         db.users.insert_one(new_user)
@@ -79,16 +77,16 @@ def signup():
 @app.route('/auth/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email')
+        username = request.form.get('username')
         password = request.form.get('password')
         
-        user_data = db.users.find_one({'email': email})
+        user_data = db.users.find_one({'username': username})
         if user_data and check_password_hash(user_data['password'], password):
             user = User(user_data)
             login_user(user)
             return redirect(url_for('profile'))
         
-        flash('Неверный email или пароль')
+        flash('Неверный логин или пароль')
     
     return render_template('login.html')
 
