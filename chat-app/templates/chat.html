@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Чат{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="online-users">
+        <h3>Онлайн:</h3>
+        <ul id="user-list"></ul>
+    </div>
+    
+    <div class="chat-messages" id="messages">
+        {% for msg in messages %}
+        <div class="message">
+            <span class="user">{{ msg.user }}</span>
+            <span class="time">{{ msg.time }}</span>
+            <p>{{ msg.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="message-input">
+        <input type="text" id="message-input" placeholder="Введите сообщение...">
+        <button onclick="sendMessage()">Отправить</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+<script>
+    const socket = io();
+    
+    socket.on('new_message', function(data) {
+        const messages = document.getElementById('messages');
+        messages.innerHTML += `
+            <div class="message">
+                <span class="user">${data.user}</span>
+                <span class="time">${data.time}</span>
+                <p>${data.text}</p>
+            </div>
+        `;
+        messages.scrollTop = messages.scrollHeight;
+    });
+
+    socket.on('user_status', function(data) {
+        const userList = document.getElementById('user-list');
+        // Логика обновления списка онлайн-пользователей
+    });
+
+    function sendMessage() {
+        const input = document.getElementById('message-input');
+        if(input.value.trim()) {
+            socket.emit('message', { text: input.value });
+            input.value = '';
+        }
+    }
+</script>
+{% endblock %}

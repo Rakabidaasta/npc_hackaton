@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+  <h1>Добро пожаловать в чат-приложение</h1>
+  <p>Здесь вы можете общаться с другими пользователями в режиме реального времени.</p>
+  {% if not current_user.is_authenticated %}
+    <button> <a href="{{ url_for('login') }}">Войти</a></button>
+    <button><a href="{{ url_for('signup') }}">Зарегистрироваться</a></button>
+  {% endif %}
+{% endblock %}

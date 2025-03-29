@@ -1,0 +1,19 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Chat for everyone",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/healthcheck": {
+        "get": {
+          "summary": "Приветствие",
+          "responses": {
+            "200": {
+              "description": "Успешный ответ"
+            }
+          }
+        }
+      }
+    }
+  }

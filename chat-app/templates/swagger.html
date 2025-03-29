@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='swagger/swagger-ui.css') }}">
+    <script src="{{ url_for('static', filename='swagger/swagger-ui-bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='swagger/swagger-ui-standalone-preset.js') }}"></script>
+</head>
+<body>
+    <div id="swagger-ui"></div>
+    <script>
+        window.onload = function() {
+            SwaggerUIBundle({
+                url: "{{ url_for('static', filename='swagger/openapi.json') }}",
+                dom_id: '#swagger-ui',
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+                layout: "BaseLayout"
+            });
+        }
+    </script>
+</body>
+</html>
