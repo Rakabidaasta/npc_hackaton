@@ -48,7 +48,7 @@ def index():
 
 @app.route('/healthcheck')
 def healthcheck():
-    return json.dumps({'status': "ok", "message": "server is running"}), 200, {'ContentType':'application/json'} 
+    return jsonify({'status': "ok", "message": "server is running"}) 
 
 
 @app.route('/auth/signup', methods=['GET', 'POST'])
